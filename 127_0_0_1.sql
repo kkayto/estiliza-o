@@ -30,63 +30,57 @@ USE `testeaula`;
 -- Estrutura da tabela `tbproduto`
 --
 
-DROP TABLE IF EXISTS `tbproduto`;
-CREATE TABLE IF NOT EXISTS `tbproduto` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  `tipo` varchar(50) NOT NULL,
-  `descricao` varchar(50) NOT NULL,
-  `Id_cadastrou` int NOT NULL,
-  `status` varchar(15) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS tbproduto (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    id_cadastrou INT,
+    status VARCHAR(15) DEFAULT 'verificar',
+    PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tbproduto`
 --
 
-INSERT INTO `tbproduto` (`id`, `nome`, `tipo`, `descricao`, `Id_cadastrou`, `status`) VALUES
-(1, 'tese', 'te', 'ee', 1, 'liberado'),
-(2, 'uva', 'teee', 'eee', 1, 'liberado'),
-(3, 'teee', 'bebida', 'ee', 1, 'bloqueado'),
-(4, 'tt', 'rr', 'rr', 1, 'liberado'),
-(5, 'tee', 'ewe', 'wewe', 1, 'liberado'),
-(15, 'celia', 'bebida', 'teste', 3, 'liberado'),
-(7, 'teee', 'eeeee', 'rere', 1, 'liberado'),
-(9, 'tew', 'te', 'tet', 1, 'liberado'),
-(10, 'oi', 'oo', 'oo', 1, 'liberado'),
-(14, 'teste', 'limpeza', 'tet', 1, 'liberado'),
-(20, 'ANA', 'TETE', 'EE', 1, 'liberado'),
-(22, '5', '54', '455', 1, 'liberado'),
-(23, 'bola', 'oturos', 'dd', 2, 'liberado'),
-(24, 'chocolate', 'alimento', 'gostoso', 2, 'bloqueado'),
-(25, 'teste de status', 'diversos', 'testes', 2, 'verificar'),
-(26, 'caneta', 'diversos', 'escreve', 1, 'verificar');
-
+INSERT INTO tbproduto (nome, tipo, descricao, id_cadastrou, status)
+VALUES
+('Trufa de Morango', 'alimento', 'Trufa artesanal recheada com morango', 1, 'liberado'),
+('Brigadeiro Gourmet', 'alimento', 'Brigadeiro com granulado belga', 1, 'liberado'),
+('Suco de Fruta', 'bebida', 'Suco natural gelado', 1, 'liberado');
 -- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS tbpedido (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_produto INT NOT NULL,
+    id_usuario INT NOT NULL,
+    quantidade INT NOT NULL DEFAULT 1,
+    observacao TEXT,
+    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Estrutura da tabela `tbusuario`
 --
-
-DROP TABLE IF EXISTS `tbusuario`;
-CREATE TABLE IF NOT EXISTS `tbusuario` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) NOT NULL,
-  `senha` varchar(15) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `nivel` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS tbusuario (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL,
+    nivel VARCHAR(10) NOT NULL DEFAULT 'user',
+    PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tbusuario`
 --
 
-INSERT INTO `tbusuario` (`id`, `login`, `senha`, `nome`, `nivel`) VALUES
-(1, 'celia', '123', 'prof Celia', 'adm'),
-(2, 'ana', '369', 'ana maria', 'usuario'),
-(3, 'Etec', 'etec', 'etec de poa', 'usuario');
+INSERT INTO tbusuario (nome, login, senha, nivel)
+VALUES
+('Administrador', 'admin', '1234', 'adm'),
+('Usuario Teste', 'user', '1234', 'user');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
