@@ -1,29 +1,21 @@
 <?php
-require_once('conexao/minhafuncao.php');
-iniciar();
-	require_once('conexao/conexao.php');
-	$id = $_GET['id'];
-	$mysql = new BancodeDados();
-	$mysql->conecta();
-
-	// recuperando o nome do arquivo
-	$sqlstring = "select * from tbproduto where id=$id ";
-	$query = @mysqli_query($mysql->con, $sqlstring);
-	$dados = @mysqli_fetch_array($query);
-     // mostra os dados
-
-		echo "ID ". $dados['id']."</br>";
-		echo "Nome<b>". $dados['nome']."</b></br>";
-		echo "Tipo<b>". $dados['tipo']."</b></br>";
-		echo  "Descrição<b>". $dados['descricao']."</b></br>";
-
-	$sqlstring = "delete from tbproduto  where id=$id";
-	 $query = @mysqli_query($mysql->con, $sqlstring);
-	if($query){
-        echo"<script language='javascript' type='text/javascript'>alert('Deletou  com sucesso!');window.location.href='cadastro.php'</script>";
-        }else{
-          echo"<script language='javascript' type='text/javascript'>alert('Não foi possível deletar');window.location.href='cadastro.php'</script>";
-        }
-
+require_once('session_init.php');
+session_start();
+if ($_SESSION['log'] != "ativo") {
+    echo "<script>alert('Precisa estar logado'); window.location.href='index.php';</script>";
+    exit;
+}
+require_once('conexao.php');
+$id = intval($_GET['id'] ?? 0);
+$mysql = new BancodeDados();
+$mysql->conecta();
+$query = $mysql->query("select * from tbproduto where id=$id");
+$dados = $query->fetchArray();
+$del = $mysql->query("delete from tbproduto where id=$id");
+if ($del) {
+    echo "<script>alert('Deletado com sucesso!'); window.location.href='pesquisa.php';</script>";
+} else {
+    echo "<script>alert('Nao foi possivel deletar'); window.location.href='pesquisa.php';</script>";
+}
+$mysql->fechar();
 ?>
-
