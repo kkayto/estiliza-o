@@ -1,48 +1,40 @@
-<!-- Professora Célia Regina Bueno Figueira
-  Etec de Poá
+<!-- Professora CÃ©lia Regina Bueno Figueira
+  Etec de PoÃ¡
  salvar como entrada.php -->
-<HTML>
-<HEAD>
- <TITLE>Verificação da senha</TITLE>
-</HEAD>
-<BODY>
 <?php
- require_once('conexao/conexao.php');
-	//criando o objeto mysql e conectando ao banco de dados
-	$mysql = new BancodeDados();
-	$mysql -> conecta();
-	
-   $plogin=$_POST['login'];
-   $psenha=$_POST['senha'];
-   // ajustando a instrução select verificar usuario e senha
-    $sqlstring = "select * from tbusuario where login='$plogin' and senha='$psenha'"  ;
-    echo $sqlstring;
-	$result = @mysqli_query($mysql->con, $sqlstring);
-	$total = $result -> num_rows;
-  if($total==1){
-        $dados=mysqli_fetch_array($result) ;
-      	session_start();
-      	$_SESSION['id']= $dados['id'];
- 		$_SESSION['nome'] =$dados['nome'] ;
-		$_SESSION['log'] = 'ativo';
-		 $_SESSION['nivel'] = $dados['nivel'];
-          if($_SESSION['nivel']=="adm"){
-		  echo"<script language='javascript' type='text/javascript'>
-          alert('você esta logado');window.location.href='cadastro.php';
-          </script>";
-          }
-          else{
-          echo"<script language='javascript' type='text/javascript'>
-          alert('Bem vindo a sistema');window.location.href='principal.php';
-          </script>";
-          }
-     }
-      else {
-      	  echo"<script language='javascript' type='text/javascript'>
-            alert('senha ou login invalido');window.location.href
-            ='naoentrou.php';</script>";
-      }
-      $mysql->fechar();
- ?>
-</BODY>
-</HTML>
+require_once('session_init.php');
+session_start();
+require_once('conexao.php');
+
+$mysql = new BancodeDados();
+$mysql->conecta();
+
+$plogin = $_POST['login'] ?? '';
+$psenha = $_POST['senha'] ?? '';
+
+$sqlstring = "select * from tbusuario where login='$plogin' and senha='$psenha'";
+$result = $mysql->query($sqlstring);
+$total = $result->num_rows;
+
+if ($total == 1) {
+    $dados = $result->fetchArray();
+    $_SESSION['id']    = $dados['id'];
+    $_SESSION['nome']  = $dados['nome'];
+    $_SESSION['log']   = 'ativo';
+    $_SESSION['nivel'] = $dados['nivel'];
+    session_write_close();
+
+    $sid = session_name() . '=' . session_id();
+
+    if ($_SESSION['nivel'] == "adm") {
+        echo "<script>alert('Voce esta logado'); window.location.href='cadastro.php?$sid';</script>";
+    } else {
+        echo "<script>alert('Bem vindo ao sistema'); window.location.href='principal.php?$sid';</script>";
+    }
+} else {
+    echo "<script>alert('Usuario ou senha invalidos'); window.location.href='naoentrou.php';</script>";
+}
+
+$mysql->fechar();
+?>
+
