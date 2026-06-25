@@ -40,30 +40,6 @@ $nivel_usuario = $_SESSION['nivel'];
             overflow: hidden;
         }
 
-        .blob {
-            position: absolute;
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .blob-top {
-            top: -10%;
-            left: -10%;
-            background: #ff80ab;
-            mix-blend-mode: multiply;
-        }
-
-        .blob-bottom {
-            bottom: -10%;
-            right: -10%;
-            background: #d500f9;
-            mix-blend-mode: multiply;
-        }
-
         .card {
             position: relative;
             z-index: 10;
@@ -83,7 +59,7 @@ $nivel_usuario = $_SESSION['nivel'];
             margin-bottom: 1.5rem;
         }
 
-        .icon-wrap {
+        .icon-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -96,7 +72,7 @@ $nivel_usuario = $_SESSION['nivel'];
             overflow: hidden;
         }
 
-        .icon-wrap img {
+        .icon-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -127,7 +103,7 @@ $nivel_usuario = $_SESSION['nivel'];
             border-bottom: 2px solid rgba(97, 62, 155, 0.15);
         }
 
-        .field {
+        .campos-input {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
@@ -224,7 +200,7 @@ $nivel_usuario = $_SESSION['nivel'];
             background: rgba(255, 255, 255, 0.85);
         }
 
-        .btn-logout {
+        .btn-sair {
             width: 100%;
             padding: 0.75rem;
             font-family: 'Montserrat', sans-serif;
@@ -239,7 +215,7 @@ $nivel_usuario = $_SESSION['nivel'];
             margin-top: 0.5rem;
         }
 
-        .btn-logout:hover {
+        .btn-sair:hover {
             background: rgba(255, 255, 255, 0.7);
         }
 
@@ -287,12 +263,9 @@ $nivel_usuario = $_SESSION['nivel'];
     </head>
 <body>
 
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
-
 <div class="card">
     <div class="card-header">
-        <div class="icon-wrap"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <div class="icon-logo"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
         <h1 class="card-title">Cadastro de Produto</h1>
         <p class="user-info">&#128075; Ola, <strong><?php echo $nome_usuario; ?></strong> &nbsp;|&nbsp; Nivel: <?php echo $nivel_usuario; ?></p>
     </div>
@@ -300,12 +273,12 @@ $nivel_usuario = $_SESSION['nivel'];
     <p class="section-title"><i class="fa-solid fa-dolly"></i> Novo produto</p>
 
     <form name="cadastro" action="mostrar_cadastro.php" method="POST">
-        <div class="field">
+        <div class="campos-input">
             <label for="fnome">Nome do produto</label>
             <input type="text" id="fnome" name="fnome" placeholder="Ex: Trufa de morango" required>
         </div>
 
-        <div class="field">
+        <div class="campos-input">
             <label for="ftipo">Categoria</label>
             <div class="select-wrap">
                 <select id="ftipo" name="ftipo">
@@ -315,7 +288,7 @@ $nivel_usuario = $_SESSION['nivel'];
             </div>
         </div>
 
-        <div class="field">
+        <div class="campos-input">
             <label for="fdescricao">Descricao</label>
             <input type="text" id="fdescricao" name="fdescricao" placeholder="Ex: Trufa recheada com morango fresco">
         </div>
@@ -330,13 +303,13 @@ $nivel_usuario = $_SESSION['nivel'];
     </form>
 
     <form name="" action="fechar_sessao.php" method="POST">
-        <button type="submit" name="sair" class="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+        <button type="submit" name="sair" class="btn-sair"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
     </form>
 
     <a href="pedidos_admin.php" class="btn btn-pedidos"><i class="fa-solid fa-cart-shopping"></i> Pedidos</a>
-    <p class="card-footer">&#127852; Moranguete Doces &mdash; Doces que melhoram o seu dia!</p>
 </div>
 
 </body>
 </html>
+
 
