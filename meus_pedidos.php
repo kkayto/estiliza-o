@@ -42,31 +42,6 @@ $query = $mysql->query("
         background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ea80fc 100%);
     }
 
-    .blob {
-        position: fixed;
-        width: 380px;
-        height: 380px;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: .4;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    .blob-top {
-        top: -10%;
-        left: -10%;
-        background: #ff80ab;
-        mix-blend-mode: multiply;
-    }
-
-    .blob-bottom {
-        bottom: -10%;
-        right: -10%;
-        background: #d500f9;
-        mix-blend-mode: multiply;
-    }
-
     .container {
         position: relative;
         z-index: 1;
@@ -74,7 +49,7 @@ $query = $mysql->query("
         margin: 0 auto;
     }
 
-    .top-bar {
+    .topo {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -83,13 +58,13 @@ $query = $mysql->query("
         margin-bottom: 1.25rem;
     }
 
-    .brand {
+    .topo-left {
         display: flex;
         align-items: center;
         gap: .75rem;
     }
 
-    .icon-wrap {
+    .icon-logo {
         width: 48px;
         height: 48px;
         border-radius: 50%;
@@ -99,7 +74,7 @@ $query = $mysql->query("
         flex-shrink: 0;
     }
 
-    .icon-wrap img {
+    .icon-logo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -157,7 +132,7 @@ $query = $mysql->query("
         border: 1.5px solid rgba(97, 62, 155, .25);
     }
 
-    .btn-danger {
+    .btn-sair {
         color: #e91e63;
         background: rgba(255, 255, 255, .5);
         border: 1.5px solid rgba(233, 30, 99, .25);
@@ -232,13 +207,13 @@ $query = $mysql->query("
         flex-shrink: 0;
     }
 
-    .pedido-qty {
+    .pedido-qtd {
         font-size: 1.1rem;
         font-weight: 800;
         color: #613e9b;
     }
 
-    .pedido-qty span {
+    .pedido-qtd span {
         font-size: .75rem;
         font-weight: 500;
         color: #8a6bb5;
@@ -262,7 +237,7 @@ $query = $mysql->query("
         margin-bottom: .5rem;
     }
 
-    .total-bar {
+    .total-pedidos {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -287,13 +262,12 @@ $query = $mysql->query("
   </style>
   </head>
 <body>
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
+
 <div class="container">
 
-  <div class="top-bar">
-    <div class="brand">
-      <div class="icon-wrap"><img src="logo.png" alt="Logo"></div>
+  <div class="topo">
+    <div class="topo-left">
+      <div class="icon-logo"><img src="logo.png" alt="Logo"></div>
       <div>
         <div class="page-title">Meus Pedidos</div>
         <div class="page-sub">Olá, <strong><?php echo htmlspecialchars($_SESSION['nome']); ?></strong>!</div>
@@ -302,7 +276,7 @@ $query = $mysql->query("
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
       <a href="principal.php" class="btn btn-secondary"><i class="fa-solid fa-store"></i> Voltar à loja</a>
       <form action="fechar_sessao.php" method="POST" style="margin:0">
-        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+        <button type="submit" class="btn btn-sair"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
       </form>
     </div>
   </div>
@@ -319,7 +293,7 @@ $query = $mysql->query("
     if (empty($pedidos)):
     ?>
       <div class="empty">
-        <div class="empty-icon">🛍️</div>
+        <div class="empty-icon"><i class="fa-solid fa-store-slash"></i></div>
         <div>Você ainda não fez nenhum pedido.</div>
         <a href="principal.php" class="btn btn-primary" style="display:inline-flex;margin-top:1rem">
           <i class="fa-solid fa-store"></i> Ver produtos
@@ -341,13 +315,13 @@ $query = $mysql->query("
           <?php endif; ?>
         </div>
         <div class="pedido-right">
-          <div class="pedido-qty"><?php echo $p['quantidade']; ?> <span>unid.</span></div>
+          <div class="pedido-qtd"><?php echo $p['quantidade']; ?> <span>unid.</span></div>
           <div class="pedido-data"><i class="fa-regular fa-clock"></i> <?php echo $data_fmt; ?></div>
         </div>
       </div>
       <?php endforeach; ?>
 
-      <div class="total-bar">
+      <div class="total-pedidos">
         <span class="total-label">Total de pedidos: <strong><?php echo count($pedidos); ?></strong></span>
         <span class="total-value"><?php echo $total_itens; ?> itens no total</span>
       </div>
