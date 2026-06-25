@@ -54,30 +54,6 @@ $mysql->fechar();
         background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ea80fc 100%);
     }
 
-    .blob {
-        position: fixed;
-        width: 380px;
-        height: 380px;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: .45;
-        pointer-events: none;
-    }
-
-    .blob-top {
-        top: -10%;
-        left: -10%;
-        background: #ff80ab;
-        mix-blend-mode: multiply;
-    }
-
-    .blob-bottom {
-        bottom: -10%;
-        right: -10%;
-        background: #d500f9;
-        mix-blend-mode: multiply;
-    }
-
     .card {
         position: relative;
         z-index: 1;
@@ -104,7 +80,7 @@ $mysql->fechar();
         margin-bottom: .4rem;
     }
 
-    .detail {
+    .detalhes-pedido {
         font-size: .85rem;
         color: #8a6bb5;
         margin-bottom: 1rem;
@@ -144,12 +120,11 @@ $mysql->fechar();
   </style>
   </head>
 <body>
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
+
 <div class="card">
-  <div class="icon">&#127856;</div>
+  <div class="icon"><i class="fa-solid fa-cart-flatbed"></i></div>
   <h2>Produto cadastrado!</h2>
-  <div class="detail">
+  <div class="detalhes-pedido">
     <strong><?php echo htmlspecialchars($pnome); ?></strong><br>
     Tipo: <?php echo htmlspecialchars($ptipo); ?><br>
     <?php echo htmlspecialchars($pdescricao); ?><br>
