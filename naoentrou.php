@@ -20,10 +20,6 @@
         overflow: hidden;
     }
 
-    .blob { position: absolute; width: 380px; height: 380px; border-radius: 50%; filter: blur(80px); opacity: 0.5; pointer-events: none; }
-    .blob-top    { top: -10%; left: -10%; background: #ff80ab; mix-blend-mode: multiply; }
-    .blob-bottom { bottom: -10%; right: -10%; background: #d500f9; mix-blend-mode: multiply; }
-
     .card {
         position: relative;
         z-index: 10;
