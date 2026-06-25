@@ -50,30 +50,6 @@ $id_param = $_GET['id'] ?? '';
             background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ea80fc 100%);
         }
 
-        .blob {
-            position: fixed;
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .45;
-            pointer-events: none;
-        }
-
-        .blob-top {
-            top: -10%;
-            left: -10%;
-            background: #ff80ab;
-            mix-blend-mode: multiply;
-        }
-
-        .blob-bottom {
-            bottom: -10%;
-            right: -10%;
-            background: #d500f9;
-            mix-blend-mode: multiply;
-        }
-
         .card {
             position: relative;
             z-index: 1;
@@ -87,7 +63,7 @@ $id_param = $_GET['id'] ?? '';
             box-shadow: 0 8px 32px rgba(31, 38, 135, .15);
         }
 
-        .icon-wrap {
+        .icon-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -100,7 +76,7 @@ $id_param = $_GET['id'] ?? '';
             overflow: hidden;
         }
 
-        .icon-wrap img {
+        .icon-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -172,10 +148,9 @@ $id_param = $_GET['id'] ?? '';
     </style>
     </head>
 <body>
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
+
 <div class="card">
-  <div class="icon-wrap"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+  <div class="icon-logo"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
   <h2>Alterar Status do Produto</h2>
   <form name="status" action="?id=<?php echo htmlspecialchars($id_param); ?>" method="POST">
     <label for="fstatus">Novo status</label>
@@ -191,4 +166,3 @@ $id_param = $_GET['id'] ?? '';
 </div>
 </body>
 </html>
-
