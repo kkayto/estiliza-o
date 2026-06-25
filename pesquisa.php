@@ -40,31 +40,6 @@ $query = $mysql->query($sqlstring);
         background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ea80fc 100%);
     }
 
-    .blob {
-        position: fixed;
-        width: 380px;
-        height: 380px;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: .4;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    .blob-top {
-        top: -10%;
-        left: -10%;
-        background: #ff80ab;
-        mix-blend-mode: multiply;
-    }
-
-    .blob-bottom {
-        bottom: -10%;
-        right: -10%;
-        background: #d500f9;
-        mix-blend-mode: multiply;
-    }
-
     .container {
         position: relative;
         z-index: 1;
@@ -80,7 +55,7 @@ $query = $mysql->query($sqlstring);
         gap: 1rem;
     }
     
-    .icon-wrap {
+    .icon-logo {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -93,7 +68,7 @@ $query = $mysql->query($sqlstring);
         overflow: hidden;
     }
 
-    .icon-wrap img {
+    .icon-logo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -128,14 +103,14 @@ $query = $mysql->query($sqlstring);
         color: #8a6bb5;
     }
 
-    .search-row {
+    .pesquisar {
         display: flex;
         gap: .75rem;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    .search-row input[type=text] {
+    .pesquisar input[type=text] {
         flex: 1;
         min-width: 160px;
         padding: .65rem 1rem;
@@ -148,7 +123,7 @@ $query = $mysql->query($sqlstring);
         outline: none;
     }
 
-    .search-row input[type=text]:focus {
+    .pesquisar input[type=text]:focus {
         border-color: #ce93d8;
         box-shadow: 0 0 0 3px rgba(206, 147, 216, .25);
     }
@@ -184,7 +159,7 @@ $query = $mysql->query($sqlstring);
         background: rgba(255, 255, 255, .9);
     }
 
-    .btn-danger {
+    .btn-sair {
         color: #e91e63;
         background: rgba(255, 255, 255, .5);
         border: 1.5px solid rgba(233, 30, 99, .25);
@@ -214,7 +189,7 @@ $query = $mysql->query($sqlstring);
         background: rgba(255, 255, 255, .4);
     }
 
-    .badge {
+    .info {
         display: inline-block;
         padding: .2rem .6rem;
         border-radius: 20px;
@@ -222,22 +197,22 @@ $query = $mysql->query($sqlstring);
         font-weight: 600;
     }
 
-    .badge-liberado {
+    .info-liberado {
         background: #e8f5e9;
         color: #388e3c;
     }
 
-    .badge-verificar {
+    .info-verificar {
         background: #fff8e1;
         color: #f57f17;
     }
 
-    .badge-bloqueado {
+    .info-bloqueado {
         background: #fce4ec;
         color: #c62828;
     }
 
-    .badge-banido {
+    .info-banido {
         background: #f3e5f5;
         color: #6a1b9a;
     }
@@ -253,7 +228,7 @@ $query = $mysql->query($sqlstring);
         background: rgba(255, 255, 255, .6);
     }
 
-    .top-bar {
+    .topo {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -264,13 +239,12 @@ $query = $mysql->query($sqlstring);
   </style>
   </head>
 <body>
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
+    
 <div class="container">
-  <div class="top-bar">
+  <div class="topo">
     <div>
       <div class="card-header">
-        <div class="icon-wrap"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <div class="icon-logo"><img src="logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
         <h1 class="card-title">Cadastro de Produto</h1>
         </div>
       <p class="sub">Ol&#225;, <strong><?php echo $_SESSION['nome']; ?></strong> &mdash; Lista de produtos</p>
@@ -280,14 +254,14 @@ $query = $mysql->query($sqlstring);
         <button type="submit" class="btn btn-primary">+ Novo produto</button>
       </form>
       <form action="fechar_sessao.php" method="POST">
-        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+        <button type="submit" class="btn btn-sair"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
       </form>
     </div>
   </div>
 
   <div class="card">
     <form action="" method="POST">
-      <div class="search-row">
+      <div class="pesquisar">
         <input type="text" name="textobusca" placeholder="Buscar por tipo (ex: alimento)..." value="<?php echo htmlspecialchars($_POST['textobusca'] ?? ''); ?>">
         <button type="submit" name="buscar" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
         <a href="pesquisa.php" class="btn btn-secondary">Limpar</a>
@@ -298,16 +272,16 @@ $query = $mysql->query($sqlstring);
   <div class="card">
     <table>
       <tr>
-        <th>#</th><th>Nome</th><th>Tipo</th><th>Descri&#231;&#227;o</th><th>Status</th>
+        <th>Id</th><th>Nome</th><th>Tipo</th><th>Descri&#231;&#227;o</th><th>Status</th>
         <th>Excluir</th><th>Tipo</th><th>Status</th>
       </tr>
       <?php while ($dados = $query->fetchArray()): ?>
         <?php
           $statusClass = match($dados['status']) {
-            'liberado' => 'badge-liberado',
-            'bloqueado' => 'badge-bloqueado',
-            'banido' => 'badge-banido',
-            default => 'badge-verificar'
+            'liberado' => 'info-liberado',
+            'bloqueado' => 'info-bloqueado',
+            'banido' => 'info-banido',
+            default => 'info-verificar'
           };
           $statusLabel = match($dados['status']) {
             'liberado'  => 'Em estoque',
@@ -323,7 +297,7 @@ $query = $mysql->query($sqlstring);
         <td><strong><?php echo htmlspecialchars($dados['nome']); ?></strong></td>
         <td><?php echo htmlspecialchars($dados['tipo']); ?></td>
         <td><?php echo htmlspecialchars($dados['descricao']); ?></td>
-        <td><span class="badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span></td>
+        <td><span class="info <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span></td>
         <td><a class="action" href="apagar.php?id=<?php echo $dados['id']; ?>" title="Excluir"><i class="fa-solid fa-trash-can"></i></a></td>
         <td><a class="action" href="alteratipo.php?id=<?php echo $id; ?>" title="Alterar tipo"><i class="fa-solid fa-pen-to-square"></i></a></td>
         <td><a class="action" href="alterastatus.php?id=<?php echo $id; ?>" title="Alterar status"><i class="fa-solid fa-chart-simple"></i></a></td>
