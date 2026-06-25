@@ -47,7 +47,7 @@
         margin-bottom: 0.3rem;
     }
 
-    .icon-wrap {
+    .icon-logo {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -60,7 +60,7 @@
         overflow: hidden;
     }
 
-    .icon-wrap img {
+    .icon-logo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -108,20 +108,18 @@
 </head>
 <body>
 
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
-
 <div class="card">
     <div class="card-header">
-        <div class="icon-wrap"><img src="logo.png" alt="Moranguete Doces"></div>
+        <div class="icon-logo"><img src="logo.png" alt="Moranguete Doces"></div>
         <h1 class="card-title">Acesso Negado</h1>
     </div>
     <p>Usu&aacute;rio ou senha inv&aacute;lidos.<br>Verifique seus dados e tente novamente.</p>
     <a href="index.php" class="btn-back">Voltar ao login &rarr;</a>
-    <p class="card-footer">&#127852; Moranguete Doces &mdash; Doces que melhoram o seu dia!</p>
 </div>
 
 </body>
+</html>
+
 </html>
 
 
