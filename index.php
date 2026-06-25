@@ -1,7 +1,7 @@
  <!-- Professora C�lia Regina Bueno Figueira
   Etec de Po�
  salvar como index.php -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -30,30 +30,6 @@
             overflow: hidden;
         }
 
-        .blob {
-            position: absolute;
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .blob-top {
-            top: -10%;
-            left: -10%;
-            background: #ff80ab;
-            mix-blend-mode: multiply;
-        }
-
-        .blob-bottom {
-            bottom: -10%;
-            right: -10%;
-            background: #d500f9;
-            mix-blend-mode: multiply;
-        }
-
         .card {
             position: relative;
             z-index: 10;
@@ -73,7 +49,7 @@
             margin-bottom: 2rem;
         }
 
-        .icon-wrap {
+        .icon-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -86,7 +62,7 @@
             overflow: hidden;
         }
 
-        .icon-wrap img {
+        .icon-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -111,13 +87,13 @@
             gap: 1.25rem;
         }
 
-        .field {
+        .campos-input {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
         }
 
-        .field-row {
+        .campos-input-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -140,7 +116,7 @@
             text-decoration: underline;
         }
 
-        .input-wrap {
+        .input-campo {
             position: relative;
         }
 
@@ -203,41 +179,32 @@
             transform: scale(0.97);
         }
 
-        .card-footer {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #8a6bb5;
-        }
     </style>
     </head>
 <body>
 
-    <div class="blob blob-top"></div>
-    <div class="blob blob-bottom"></div>
-
     <div class="card">
         <div class="card-header">
-            <div class="icon-wrap"><img src="logo.png" alt="Moranguete Doces"></div>
+            <div class="icon-logo"><img src="logo.png" alt="Moranguete Doces"></div>
             <h1 class="card-title">Moranguete Doces</h1>
             <p class="card-subtitle">Acesse sua conta para continuar comprando</p>
         </div>
 
         <form action="entrada.php" method="post" enctype="multipart/form-data">
-            <div class="field">
+            <div class="campos-input">
                 <label for="login">Usu&aacute;rio</label>
-                <div class="input-wrap">
+                <div class="input-campo">
                     <span class="input-icon"><i class="fa-solid fa-user"></i></span>
                     <input type="text" id="login" name="login" placeholder="ex: user" required>
                 </div>
             </div>
 
-            <div class="field">
-                <div class="field-row">
+            <div class="campos-input">
+                <div class="campos-input-row">
                     <label for="senha">Senha</label>
                     <a href="#" class="forgot">Esqueceu a senha?</a>
                 </div>
-                <div class="input-wrap">
+                <div class="input-campo">
                     <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
                     <input type="password" id="senha" name="senha" placeholder="••••••••" required>
                 </div>
@@ -248,10 +215,7 @@
             </button>
         </form>
 
-        <p class="card-footer">🍬 Doces que melhoram o seu dia!</p>
     </div>
 
 </body>
 </html>
-
- </HTML>
