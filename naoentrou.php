@@ -1,6 +1,3 @@
-  <!-- Professora Célia Regina Bueno Figueira
-  Etec de Poá
- salvar como naoentrou.php -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -119,7 +116,3 @@
 
 </body>
 </html>
-
-</html>
-
-
