@@ -1,0 +1,10 @@
+cliente:
+usuario: user
+senha: 1234
+
+admin
+usuario: admin
+senha: 1234
+
+além da estilização de cada pagina, tambem criei mais dois arquivos que são "meus_pedidos.php" onde o cliente pode acessar seu carrinho de compras que contem seus pedidos na loja, 
+e "pedidos_admin.php", onde mostra para o admin os pedidos feitos ativos.
