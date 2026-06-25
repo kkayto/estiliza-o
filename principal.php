@@ -39,33 +39,8 @@ $query = $mysql->query($sqlstring);
               padding: 1.5rem;
               background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ea80fc 100%);
           }
-
-          .blob {
-              position: fixed;
-              width: 380px;
-              height: 380px;
-              border-radius: 50%;
-              filter: blur(80px);
-              opacity: .4;
-              pointer-events: none;
-              z-index: 0;
-          }
-
-          .blob-top {
-              top: -10%;
-              left: -10%;
-              background: #ff80ab;
-              mix-blend-mode: multiply;
-          }
-
-          .blob-bottom {
-              bottom: -10%;
-              right: -10%;
-              background: #d500f9;
-              mix-blend-mode: multiply;
-          }
         
-        .icon-wrap {
+        .icon-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -86,7 +61,7 @@ $query = $mysql->query($sqlstring);
             letter-spacing: -0.5px;
         }
         
-        .icon-wrap img {
+        .icon-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -136,14 +111,14 @@ $query = $mysql->query($sqlstring);
               color: #8a6bb5;
           }
 
-          .search-row {
+          .pesquisar {
               display: flex;
               gap: .75rem;
               align-items: center;
               flex-wrap: wrap;
           }
 
-          .search-row input[type=text] {
+          .pesquisar input[type=text] {
               flex: 1;
               min-width: 160px;
               padding: .65rem 1rem;
@@ -203,19 +178,19 @@ $query = $mysql->query($sqlstring);
                 transform: scale(1.03);
             }
 
-          .btn-danger {
+          .btn-sair {
               color: #e91e63;
               background: rgba(255, 255, 255, .5);
               border: 1.5px solid rgba(233, 30, 99, .25);
           }
 
-          .products-grid {
+          .area-produtos {
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
               gap: 1rem;
           }
 
-          .product-card {
+          .produtos-card {
               background: rgba(255, 255, 255, .6);
               border-radius: 16px;
               padding: 1.25rem;
@@ -223,32 +198,32 @@ $query = $mysql->query($sqlstring);
               transition: transform .15s, box-shadow .15s;
           }
 
-          .product-card:hover {
+          .produtos-card:hover {
               transform: translateY(-3px);
               box-shadow: 0 12px 30px rgba(31, 38, 135, .15);
           }
 
-          .product-name {
+          .produtos-name {
               font-size: .95rem;
               font-weight: 700;
               color: #613e9b;
               margin-bottom: .3rem;
           }
 
-          .product-type {
+          .produtos-type {
               font-size: .75rem;
               color: #8a6bb5;
               margin-bottom: .5rem;
           }
 
-          .product-desc {
+          .produtos-desc {
               font-size: .8rem;
               color: #4a3570;
               margin-bottom: .75rem;
               line-height: 1.4;
           }
 
-          .btn-buy {
+          .btn-comprar {
               width: 100%;
               padding: .6rem;
               font-family: 'Montserrat', sans-serif;
@@ -264,11 +239,11 @@ $query = $mysql->query($sqlstring);
               text-align: center;
           }
 
-          .btn-buy:hover {
+          .btn-comprar:hover {
               opacity: .9;
           }
 
-          .top-bar {
+          .topo {
               display: flex;
               justify-content: space-between;
               align-items: center;
@@ -286,25 +261,24 @@ $query = $mysql->query($sqlstring);
       </style>
   </head>
 <body>
-<div class="blob blob-top"></div>
-<div class="blob blob-bottom"></div>
+    
 <div class="container">
-  <div class="top-bar">
+  <div class="topo">
     <div>
       <div class="card-header">
-      <div class="icon-wrap"><img src="logo.png" alt="Moranguete Doces"></div>
+      <div class="icon-logo"><img src="logo.png" alt="Moranguete Doces"></div>
       <h1 class="card-title">Moranguete Doces</h1></div
       <p class="sub">Bem-vindo, <strong><?php echo $_SESSION['nome']; ?></strong>! Escolha seus doces.</p>
     </div>
         <a href="meus_pedidos.php" class="btn btn-pedidos"><i class="fa-solid fa-bag-shopping"></i> Meus Pedidos</a>
     <form action="fechar_sessao.php" method="POST">
-      <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+      <button type="submit" class="btn btn-sair"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
     </form>
   </div>
 
   <div class="card">
     <form action="" method="POST">
-      <div class="search-row">
+      <div class="pesquisar">
         <input type="text" name="textobusca" placeholder="Buscar por tipo (ex: alimento, bebida)..." value="<?php echo htmlspecialchars($_POST['textobusca'] ?? ''); ?>">
         <button type="submit" name="buscar" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
         <a href="principal.php" class="btn btn-secondary">Limpar</a>
@@ -312,18 +286,18 @@ $query = $mysql->query($sqlstring);
     </form>
   </div>
 
-  <div class="products-grid">
+  <div class="area-produtos">
     <?php
     $found = false;
     while ($dados = $query->fetchArray()):
       $found = true;
       $id = base64_encode($dados['id']);
     ?>
-    <div class="product-card">
-      <div class="product-name"><?php echo htmlspecialchars($dados['nome']); ?></div>
-      <div class="product-type">&#127857; <?php echo htmlspecialchars($dados['tipo']); ?></div>
-      <div class="product-desc"><?php echo htmlspecialchars($dados['descricao']); ?></div>
-      <a href="comprar.php?id=<?php echo $id; ?>" class="btn-buy"><i class="fa-solid fa-basket-shopping"></i> Comprar</a>
+    <div class="produtos-card">
+      <div class="produtos-name"><?php echo htmlspecialchars($dados['nome']); ?></div>
+      <div class="produtos-type">&#127857; <?php echo htmlspecialchars($dados['tipo']); ?></div>
+      <div class="produtos-desc"><?php echo htmlspecialchars($dados['descricao']); ?></div>
+      <a href="comprar.php?id=<?php echo $id; ?>" class="btn-comprar"><i class="fa-solid fa-basket-shopping"></i> Comprar</a>
     </div>
     <?php endwhile; ?>
     <?php if (!$found): ?>
